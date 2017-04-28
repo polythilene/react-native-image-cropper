@@ -194,7 +194,20 @@ class ImageCrop extends Component {
     // return this.refs.cropit.captureFrame({quality: this.props.quality, type: this.props.type, format: this.props.format, filePath: this.props.filePath})
 		if(this.props.format === 'file') {
 			var RNFS = require('react-native-fs');
-			var path = RNFS.CachesDirectoryPath + '/' + this.props.filePath;
+			var path = RNFS.CachesDirectoryPath + '/' + this.props.fileName;
+
+			/*
+			RNFS.exists(path).then((result) => {
+				if(result) {
+						RNFS.unlink(path).then(() => {
+							return this.refs.cropit.captureFrame({quality: this.props.quality, type: this.props.type, format: this.props.format, filePath: path})
+						});
+				}
+				else {
+					return this.refs.cropit.captureFrame({quality: this.props.quality, type: this.props.type, format: this.props.format, filePath: path})
+				}
+			});
+			*/
 			return this.refs.cropit.captureFrame({quality: this.props.quality, type: this.props.type, format: this.props.format, filePath: path})
 		}
 		else {
@@ -213,7 +226,7 @@ ImageCrop.defaultProps = {
   pixelRatio: PixelRatio.get(),
   type: 'jpg',
   format: 'base64',
-	filePath: '',
+	fileName: '',
 }
 ImageCrop.propTypes = {
   image: React.PropTypes.string.isRequired,
